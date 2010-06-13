@@ -1,13 +1,13 @@
 Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
-Version:	0.9.7
+Version:	1.0.1
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
-Source0:	http://cloud.github.com/downloads/MattColyer/libiphone/%{name}-%{version}.tar.bz2
-# Source0-md5:	b47cf0a645bc2ee2fa34dac11743b40f
-URL:		http://matt.colyer.name/projects/iphone-linux/
+Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
+# Source0-md5:	684edcf0946f5a8db95bfcced7626dbe
+URL:		http://www.libimobiledevice.org/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
 BuildRequires:	glib2-devel >= 1:2.14.1
@@ -17,7 +17,7 @@ BuildRequires:	libplist-devel >= 0.15
 BuildRequires:	libtasn1-devel >= 1.1
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
-BuildRequires:	swig-python
+BuildRequires:	swig-python >= 1.3.21
 BuildRequires:	usbmuxd-devel >= 0.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -78,7 +78,8 @@ Wiązania libimobiledevice dla Pythona.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	--disable-silent-rules
 %{__make}
 
 %install
@@ -104,11 +105,18 @@ rm -rf $RPM_BUILD_ROOT
 %doc AUTHORS NEWS README
 %attr(755,root,root) %{_bindir}/idevice_id
 %attr(755,root,root) %{_bindir}/idevicebackup
+%attr(755,root,root) %{_bindir}/ideviceimagemounter
 %attr(755,root,root) %{_bindir}/ideviceinfo
+%attr(755,root,root) %{_bindir}/idevicescreenshot
 %attr(755,root,root) %{_bindir}/idevicesyslog
 %attr(755,root,root) %{_libdir}/libimobiledevice.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libimobiledevice.so.0
-%{_datadir}/hal/fdi/information/20thirdparty/31-apple-mobile-device.fdi
+%attr(755,root,root) %ghost %{_libdir}/libimobiledevice.so.1
+%{_mandir}/man1/idevice_id.1*
+%{_mandir}/man1/idevicebackup.1*
+%{_mandir}/man1/ideviceimagemounter.1*
+%{_mandir}/man1/ideviceinfo.1*
+%{_mandir}/man1/idevicescreenshot.1*
+%{_mandir}/man1/idevicesyslog.1*
 
 %files devel
 %defattr(644,root,root,755)

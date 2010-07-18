@@ -1,12 +1,16 @@
+#
+# Conditional build:
+%bcond_without	static_libs	# don't build static libraries
+
 Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
-Version:	1.0.1
-Release:	2
+Version:	1.0.2
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
-# Source0-md5:	684edcf0946f5a8db95bfcced7626dbe
+# Source0-md5:	b83dd6f501e2ef199927c20866e9e113
 URL:		http://www.libimobiledevice.org/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -79,6 +83,7 @@ Wiązania libimobiledevice dla Pythona.
 %{__autoheader}
 %{__automake}
 %configure \
+	%{!?with_static_libs:--disable-static}
 	--disable-silent-rules
 %{__make}
 
@@ -103,10 +108,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README
-%attr(755,root,root) %{_bindir}/idevice_id
 %attr(755,root,root) %{_bindir}/idevicebackup
+%attr(755,root,root) %{_bindir}/idevice_id
 %attr(755,root,root) %{_bindir}/ideviceimagemounter
 %attr(755,root,root) %{_bindir}/ideviceinfo
+%attr(755,root,root) %{_bindir}/idevicepair
 %attr(755,root,root) %{_bindir}/idevicescreenshot
 %attr(755,root,root) %{_bindir}/idevicesyslog
 %attr(755,root,root) %{_libdir}/libimobiledevice.so.*.*.*
@@ -126,9 +132,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/libimobiledevice
 %{_pkgconfigdir}/libimobiledevice-1.0.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libimobiledevice.a
+%endif
 
 %files -n python-imobiledevice
 %defattr(644,root,root,755)

@@ -6,7 +6,7 @@ Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
 Version:	1.0.2
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
@@ -83,7 +83,7 @@ Wiązania libimobiledevice dla Pythona.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?with_static_libs:--disable-static}
+	%{!?with_static_libs:--disable-static} \
 	--disable-silent-rules
 %{__make}
 

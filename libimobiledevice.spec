@@ -19,9 +19,13 @@ BuildRequires:	glib2-devel >= 1:2.14.1
 BuildRequires:	gnutls-devel >= 1.6.3
 BuildRequires:	libgcrypt-devel
 BuildRequires:	libplist-devel >= 0.15
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtasn1-devel >= 1.1
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+BuildRequires:	python-devel
+BuildRequires:	python-modules
+BuildRequires:	rpm-pythonprov
 BuildRequires:	swig-python >= 1.3.21
 BuildRequires:	usbmuxd-devel >= 0.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)

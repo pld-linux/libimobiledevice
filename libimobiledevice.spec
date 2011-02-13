@@ -26,7 +26,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	rpm-pythonprov
-BuildRequires:	swig-python >= 1.3.21
+BuildRequires:	swig-python >= 2.0.0
 BuildRequires:	usbmuxd-devel >= 0.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

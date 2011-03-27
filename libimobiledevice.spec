@@ -5,12 +5,12 @@
 Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
-Version:	1.0.4
+Version:	1.0.6
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
-# Source0-md5:	dbf62f2fddaa87558b6f1ebc76abb549
+# Source0-md5:	bd5cdff5212060ee299481360f67fa24
 Patch0:		swig2.patch
 URL:		http://www.libimobiledevice.org/
 BuildRequires:	autoconf >= 2.61
@@ -115,6 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS NEWS README
 %attr(755,root,root) %{_bindir}/idevicebackup
+%attr(755,root,root) %{_bindir}/ideviceenterrecovery
 %attr(755,root,root) %{_bindir}/idevice_id
 %attr(755,root,root) %{_bindir}/ideviceimagemounter
 %attr(755,root,root) %{_bindir}/ideviceinfo
@@ -123,10 +124,12 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/idevicesyslog
 %attr(755,root,root) %{_libdir}/libimobiledevice.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libimobiledevice.so.1
-%{_mandir}/man1/idevice_id.1*
 %{_mandir}/man1/idevicebackup.1*
+%{_mandir}/man1/ideviceenterrecovery.1*
+%{_mandir}/man1/idevice_id.1*
 %{_mandir}/man1/ideviceimagemounter.1*
 %{_mandir}/man1/ideviceinfo.1*
+%{_mandir}/man1/idevicepair.1*
 %{_mandir}/man1/idevicescreenshot.1*
 %{_mandir}/man1/idevicesyslog.1*
 

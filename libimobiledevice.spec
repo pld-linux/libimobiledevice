@@ -5,12 +5,12 @@
 Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
-Version:	1.0.6
+Version:	1.1.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
-# Source0-md5:	bd5cdff5212060ee299481360f67fa24
+# Source0-md5:	b38bb70a41538a2ad593b0779651a636
 Patch0:		swig2.patch
 URL:		http://www.libimobiledevice.org/
 BuildRequires:	autoconf >= 2.61
@@ -99,7 +99,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -f $RPM_BUILD_ROOT%{py_sitedir}/imobiledevice/*.{a,la}
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/imobiledevice/*.{a,la}
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
@@ -123,13 +123,11 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/idevicescreenshot
 %attr(755,root,root) %{_bindir}/idevicesyslog
 %attr(755,root,root) %{_libdir}/libimobiledevice.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libimobiledevice.so.1
+%attr(755,root,root) %ghost %{_libdir}/libimobiledevice.so.2
 %{_mandir}/man1/idevicebackup.1*
-%{_mandir}/man1/ideviceenterrecovery.1*
 %{_mandir}/man1/idevice_id.1*
 %{_mandir}/man1/ideviceimagemounter.1*
 %{_mandir}/man1/ideviceinfo.1*
-%{_mandir}/man1/idevicepair.1*
 %{_mandir}/man1/idevicescreenshot.1*
 %{_mandir}/man1/idevicesyslog.1*
 

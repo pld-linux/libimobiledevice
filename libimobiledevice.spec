@@ -6,7 +6,7 @@ Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
 Version:	1.1.0
-Release:	1
+Release:	2
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
@@ -100,6 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} $RPM_BUILD_ROOT%{py_sitedir}/imobiledevice/*.{a,la}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
@@ -135,7 +136,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc docs/html/
 %attr(755,root,root) %{_libdir}/libimobiledevice.so
-%{_libdir}/libimobiledevice.la
 %{_includedir}/libimobiledevice
 %{_pkgconfigdir}/libimobiledevice-1.0.pc
 

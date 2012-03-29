@@ -1,32 +1,38 @@
 #
 # Conditional build:
 %bcond_without	static_libs	# don't build static libraries
+%bcond_without	cython	# build with Cython based Python bindings
+%bcond_without	openssl	# build with openssl for SSL support
+%bcond_with	gnutls	# build with GnuTLS for SSL support
+
+%if %{with gnutls}
+%undefine	with_openssl
+%endif
 
 Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
-Version:	1.1.1
-Release:	2
+Version:	1.1.2
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
-# Source0-md5:	cdc13037e822d9ac2e109536701d153a
-Patch0:		swig2.patch
+# Source0-md5:	82851e4ca9794ee660ffca9f78c8e068
 URL:		http://www.libimobiledevice.org/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
-BuildRequires:	glib2-devel >= 1:2.14.1
-BuildRequires:	gnutls-devel >= 1.6.3
+%{?with_gnutls:BuildRequires:	gnutls-devel >= 2.2.0}
 BuildRequires:	libgcrypt-devel
-BuildRequires:	libplist-devel >= 0.15
+BuildRequires:	libplist-devel >= 1.8
 BuildRequires:	libstdc++-devel
-BuildRequires:	libtasn1-devel >= 1.1
+%{?with_gnutls:BuildRequires:	libtasn1-devel >= 1.1}
 BuildRequires:	libtool
+%{?with_openssl:BuildRequires:	openssl-devel >= 0.9.8}
 BuildRequires:	pkgconfig
+%{?with_cython:BuildRequires:	python-Cython >= 0.13.0}
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	rpm-pythonprov
-BuildRequires:	swig-python >= 2.0.0
 BuildRequires:	usbmuxd-devel >= 0.1.4
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,10 +48,10 @@ Summary:	Header files for libimobiledevice library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libimobiledevice
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	glib2-devel >= 1:2.14.1
-Requires:	gnutls-devel >= 1.6.3
-Requires:	libplist-devel >= 0.15
-Requires:	libtasn1-devel >= 1.1
+%{?with_gnutls:Requires:	gnutls-devel >= 2.2.0}
+Requires:	libplist-devel >= 1.8
+%{?with_gnutls:Requires:	libtasn1-devel >= 1.1}
+%{?with_openssl:Requires:	openssl-devel >= 0.9.8}
 Requires:	usbmuxd-devel >= 0.1.4
 
 %description devel
@@ -80,7 +86,6 @@ Wiązania libimobiledevice dla Pythona.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -90,6 +95,8 @@ Wiązania libimobiledevice dla Pythona.
 %{__automake}
 %configure \
 	%{!?with_static_libs:--disable-static} \
+	%{!?with_cython:--without-cython} \
+	%{!?with_openssl:--disable-openssl} \
 	--disable-silent-rules
 %{__make}
 
@@ -99,7 +106,7 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/imobiledevice/*.{a,la}
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
@@ -126,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/idevicescreenshot
 %attr(755,root,root) %{_bindir}/idevicesyslog
 %attr(755,root,root) %{_libdir}/libimobiledevice.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libimobiledevice.so.2
+%attr(755,root,root) %ghost %{_libdir}/libimobiledevice.so.3
 %{_mandir}/man1/idevicebackup.1*
 %{_mandir}/man1/idevicebackup2.1*
 %{_mandir}/man1/idevicedate.1*
@@ -151,8 +158,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libimobiledevice.a
 %endif
 
+%if %{with cython}
 %files -n python-imobiledevice
 %defattr(644,root,root,755)
-%dir %{py_sitedir}/imobiledevice
-%attr(755,root,root) %{py_sitedir}/imobiledevice/_imobiledevice.so
-%{py_sitedir}/imobiledevice/*.py[co]
+%attr(755,root,root) %{py_sitedir}/imobiledevice.so
+%endif

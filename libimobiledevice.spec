@@ -12,12 +12,12 @@
 Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
-Version:	1.1.2
+Version:	1.1.4
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
-# Source0-md5:	82851e4ca9794ee660ffca9f78c8e068
+# Source0-md5:	3f28cbc6a2e30d34685049c0abde5183
 URL:		http://www.libimobiledevice.org/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -33,7 +33,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	python-devel
 BuildRequires:	python-modules
 BuildRequires:	rpm-pythonprov
-BuildRequires:	usbmuxd-devel >= 0.1.4
+BuildRequires:	usbmuxd-devel >= 1.0.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -52,7 +52,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	libplist-devel >= 1.8
 %{?with_gnutls:Requires:	libtasn1-devel >= 1.1}
 %{?with_openssl:Requires:	openssl-devel >= 0.9.8}
-Requires:	usbmuxd-devel >= 0.1.4
+Requires:	usbmuxd-devel >= 1.0.8
 
 %description devel
 Header files for libimobiledevice library.

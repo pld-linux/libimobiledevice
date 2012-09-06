@@ -1,9 +1,9 @@
 #
 # Conditional build:
 %bcond_without	static_libs	# don't build static libraries
-%bcond_without	cython	# build with Cython based Python bindings
-%bcond_without	openssl	# build with openssl for SSL support
-%bcond_with	gnutls	# build with GnuTLS for SSL support
+%bcond_without	cython		# build with Cython based Python bindings
+%bcond_without	openssl		# build with openssl for SSL support
+%bcond_with	gnutls		# build with GnuTLS for SSL support
 
 %if %{with gnutls}
 %undefine	with_openssl
@@ -16,8 +16,10 @@ Version:	1.1.4
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
+#Source0Download: http://www.libimobiledevice.org/
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
 # Source0-md5:	3f28cbc6a2e30d34685049c0abde5183
+Patch0:		%{name}-cython.patch
 URL:		http://www.libimobiledevice.org/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
@@ -86,6 +88,7 @@ Wiązania libimobiledevice dla Pythona.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}

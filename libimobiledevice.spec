@@ -32,10 +32,12 @@ BuildRequires:	libtool
 %{?with_openssl:BuildRequires:	openssl-devel >= 0.9.8}
 BuildRequires:	pkgconfig
 %{?with_cython:BuildRequires:	python-Cython >= 0.13.0}
-BuildRequires:	python-devel
-BuildRequires:	python-modules
+BuildRequires:	python-devel >= 2.3
+BuildRequires:	python-modules >= 2.3
 BuildRequires:	rpm-pythonprov
 BuildRequires:	usbmuxd-devel >= 1.0.8
+Requires:	libplist >= 1.8
+Requires:	usbmuxd-libs >= 1.0.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description

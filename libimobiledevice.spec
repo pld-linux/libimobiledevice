@@ -1,3 +1,5 @@
+# TODO
+# - investigate python (cython) build failure (missing files)
 #
 # Conditional build:
 %bcond_without	static_libs	# don't build static libraries
@@ -12,32 +14,30 @@
 Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
-Version:	1.1.5
-Release:	3
+Version:	1.1.6
+Release:	0.1
 License:	LGPL v2+
 Group:		Libraries
 #Source0Download: http://www.libimobiledevice.org/
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
-# Source0-md5:	d9debdcf71508dee2c85b60b28ccddd4
+# Source0-md5:	274783651e9b772774cd9fed2fc52e08
 Patch0:		%{name}-cython.patch
 URL:		http://www.libimobiledevice.org/
 BuildRequires:	autoconf >= 2.61
 BuildRequires:	automake
 %{?with_gnutls:BuildRequires:	gnutls-devel >= 2.2.0}
 BuildRequires:	libgcrypt-devel
-BuildRequires:	libplist-devel >= 1.8
+BuildRequires:	libplist-devel >= 1.11
 BuildRequires:	libstdc++-devel
 %{?with_gnutls:BuildRequires:	libtasn1-devel >= 1.1}
 BuildRequires:	libtool
+BuildRequires:	libusbmuxd-devel >= 1.0.9
 %{?with_openssl:BuildRequires:	openssl-devel >= 0.9.8}
 BuildRequires:	pkgconfig
 %{?with_cython:BuildRequires:	python-Cython >= 0.17.0}
 BuildRequires:	python-devel >= 2.3
 BuildRequires:	python-modules >= 2.3
 BuildRequires:	rpm-pythonprov
-BuildRequires:	usbmuxd-devel >= 1.0.8
-Requires:	libplist >= 1.8
-Requires:	usbmuxd-libs >= 1.0.8
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -55,8 +55,8 @@ Requires:	%{name} = %{version}-%{release}
 %{?with_gnutls:Requires:	gnutls-devel >= 2.2.0}
 Requires:	libplist-devel >= 1.8
 %{?with_gnutls:Requires:	libtasn1-devel >= 1.1}
+Requires:	libusbmuxd-devel >= 1.0.9
 %{?with_openssl:Requires:	openssl-devel >= 0.9.8}
-Requires:	usbmuxd-devel >= 1.0.8
 
 %description devel
 Header files for libimobiledevice library.
@@ -111,12 +111,14 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
+%if %{with cython}
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -130,12 +132,14 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/idevice_id
 %attr(755,root,root) %{_bindir}/idevicebackup
 %attr(755,root,root) %{_bindir}/idevicebackup2
+%attr(755,root,root) %{_bindir}/idevicecrashreport
 %attr(755,root,root) %{_bindir}/idevicedate
 %attr(755,root,root) %{_bindir}/idevicedebugserverproxy
 %attr(755,root,root) %{_bindir}/idevicediagnostics
 %attr(755,root,root) %{_bindir}/ideviceenterrecovery
 %attr(755,root,root) %{_bindir}/ideviceimagemounter
 %attr(755,root,root) %{_bindir}/ideviceinfo
+%attr(755,root,root) %{_bindir}/idevicename
 %attr(755,root,root) %{_bindir}/idevicepair
 %attr(755,root,root) %{_bindir}/ideviceprovision
 %attr(755,root,root) %{_bindir}/idevicescreenshot
@@ -145,12 +149,14 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/idevice_id.1*
 %{_mandir}/man1/idevicebackup.1*
 %{_mandir}/man1/idevicebackup2.1*
+%{_mandir}/man1/idevicecrashreport.1*
 %{_mandir}/man1/idevicedate.1*
 %{_mandir}/man1/idevicedebugserverproxy.1*
 %{_mandir}/man1/idevicediagnostics.1*
 %{_mandir}/man1/ideviceenterrecovery.1*
 %{_mandir}/man1/ideviceimagemounter.1*
 %{_mandir}/man1/ideviceinfo.1*
+%{_mandir}/man1/idevicename.1*
 %{_mandir}/man1/idevicepair.1*
 %{_mandir}/man1/ideviceprovision.1*
 %{_mandir}/man1/idevicescreenshot.1*

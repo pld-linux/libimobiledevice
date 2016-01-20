@@ -12,13 +12,14 @@
 Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
-Version:	1.1.6
+# 1.2.x is stable
+Version:	1.2.0
 Release:	1
 License:	LGPL v2+
 Group:		Libraries
 #Source0Download: http://www.libimobiledevice.org/
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
-# Source0-md5:	274783651e9b772774cd9fed2fc52e08
+# Source0-md5:	8757900ba7bbe2ef5f54342415d0223e
 Patch0:		%{name}-cython.patch
 URL:		http://www.libimobiledevice.org/
 BuildRequires:	autoconf >= 2.61
@@ -133,29 +134,33 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/idevicebackup2
 %attr(755,root,root) %{_bindir}/idevicecrashreport
 %attr(755,root,root) %{_bindir}/idevicedate
+%attr(755,root,root) %{_bindir}/idevicedebug
 %attr(755,root,root) %{_bindir}/idevicedebugserverproxy
 %attr(755,root,root) %{_bindir}/idevicediagnostics
 %attr(755,root,root) %{_bindir}/ideviceenterrecovery
 %attr(755,root,root) %{_bindir}/ideviceimagemounter
 %attr(755,root,root) %{_bindir}/ideviceinfo
 %attr(755,root,root) %{_bindir}/idevicename
+%attr(755,root,root) %{_bindir}/idevicenotificationproxy
 %attr(755,root,root) %{_bindir}/idevicepair
 %attr(755,root,root) %{_bindir}/ideviceprovision
 %attr(755,root,root) %{_bindir}/idevicescreenshot
 %attr(755,root,root) %{_bindir}/idevicesyslog
 %attr(755,root,root) %{_libdir}/libimobiledevice.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libimobiledevice.so.4
+%attr(755,root,root) %ghost %{_libdir}/libimobiledevice.so.6
 %{_mandir}/man1/idevice_id.1*
 %{_mandir}/man1/idevicebackup.1*
 %{_mandir}/man1/idevicebackup2.1*
 %{_mandir}/man1/idevicecrashreport.1*
 %{_mandir}/man1/idevicedate.1*
+%{_mandir}/man1/idevicedebug.1*
 %{_mandir}/man1/idevicedebugserverproxy.1*
 %{_mandir}/man1/idevicediagnostics.1*
 %{_mandir}/man1/ideviceenterrecovery.1*
 %{_mandir}/man1/ideviceimagemounter.1*
 %{_mandir}/man1/ideviceinfo.1*
 %{_mandir}/man1/idevicename.1*
+%{_mandir}/man1/idevicenotificationproxy.1*
 %{_mandir}/man1/idevicepair.1*
 %{_mandir}/man1/ideviceprovision.1*
 %{_mandir}/man1/idevicescreenshot.1*

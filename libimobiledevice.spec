@@ -1,7 +1,3 @@
-# TODO
-# - investigate python (cython) build failure (missing files)
-#   checking for libplist Cython bindings... no
-#   configure: WARNING: cannot find libplist Cython bindings. You should install your distribution specific libplist Cython bindings package.
 #
 # Conditional build:
 %bcond_without	static_libs	# don't build static libraries
@@ -17,7 +13,7 @@ Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
 Version:	1.1.6
-Release:	0.1
+Release:	1
 License:	LGPL v2+
 Group:		Libraries
 #Source0Download: http://www.libimobiledevice.org/

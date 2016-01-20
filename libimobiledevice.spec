@@ -1,5 +1,7 @@
 # TODO
 # - investigate python (cython) build failure (missing files)
+#   checking for libplist Cython bindings... no
+#   configure: WARNING: cannot find libplist Cython bindings. You should install your distribution specific libplist Cython bindings package.
 #
 # Conditional build:
 %bcond_without	static_libs	# don't build static libraries
@@ -37,6 +39,7 @@ BuildRequires:	pkgconfig
 %{?with_cython:BuildRequires:	python-Cython >= 0.17.0}
 BuildRequires:	python-devel >= 2.3
 BuildRequires:	python-modules >= 2.3
+%{?with_cython:BuildRequires:	python-plist}
 BuildRequires:	rpm-pythonprov
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 

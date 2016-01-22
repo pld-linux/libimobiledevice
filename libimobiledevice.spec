@@ -22,22 +22,28 @@ Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
 # Source0-md5:	8757900ba7bbe2ef5f54342415d0223e
 Patch0:		%{name}-cython.patch
 URL:		http://www.libimobiledevice.org/
-BuildRequires:	autoconf >= 2.61
+BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake
 %{?with_gnutls:BuildRequires:	gnutls-devel >= 2.2.0}
 BuildRequires:	libgcrypt-devel
 BuildRequires:	libplist-devel >= 1.11
+BuildRequires:	libplist-c++-devel >= 1.11
 BuildRequires:	libstdc++-devel
 %{?with_gnutls:BuildRequires:	libtasn1-devel >= 1.1}
 BuildRequires:	libtool
 BuildRequires:	libusbmuxd-devel >= 1.0.9
 %{?with_openssl:BuildRequires:	openssl-devel >= 0.9.8}
 BuildRequires:	pkgconfig
-%{?with_cython:BuildRequires:	python-Cython >= 0.17.0}
-BuildRequires:	python-devel >= 2.3
-BuildRequires:	python-modules >= 2.3
-%{?with_cython:BuildRequires:	python-plist}
+%if %{with cython}
+BuildRequires:	python-Cython >= 0.17.0
+BuildRequires:	python-devel >= 1:2.3
+BuildRequires:	python-modules >= 1:2.3
+BuildRequires:	python-plist-devel >= 1.11
 BuildRequires:	rpm-pythonprov
+%endif
+Requires:	libplist >= 1.11
+Requires:	libplist-c++ >= 1.11
+Requires:	libusbmuxd >= 1.0.9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -53,7 +59,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libimobiledevice
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_gnutls:Requires:	gnutls-devel >= 2.2.0}
-Requires:	libplist-devel >= 1.8
+Requires:	libplist-devel >= 1.11
+Requires:	libplist-c++-devel >= 1.11
 %{?with_gnutls:Requires:	libtasn1-devel >= 1.1}
 Requires:	libusbmuxd-devel >= 1.0.9
 %{?with_openssl:Requires:	openssl-devel >= 0.9.8}
@@ -81,6 +88,7 @@ Summary:	libimobiledevice Python bindings
 Summary(pl.UTF-8):	Wiązania libimobiledevice dla Pythona
 Group:		Development/Languages/Python
 Requires:	%{name} = %{version}-%{release}
+Requires:	python-plist >= 1.11
 
 %description -n python-imobiledevice
 libimobiledevice Python bindings.

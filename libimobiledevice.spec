@@ -83,6 +83,20 @@ Static libimobiledevice library.
 %description static -l pl.UTF-8
 Statyczna biblioteka libimobiledevice.
 
+%package apidocs
+Summary:	API documentation for libimobiledevice library
+Summary(pl.UTF-8):	Dokumentacja API biblioteki libimobiledevice
+Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description apidocs
+API documentation for libimobiledevice library.
+
+%description apidocs -l pl.UTF-8
+Dokumentacja API biblioteki libimobiledevice.
+
 %package -n python-imobiledevice
 Summary:	libimobiledevice Python bindings
 Summary(pl.UTF-8):	Wiązania libimobiledevice dla Pythona
@@ -122,7 +136,8 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} $RPM_BUILD_ROOT%{_libdir}/*.la
 
 %if %{with cython}
-%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.{a,la}
+%{__rm} $RPM_BUILD_ROOT%{py_sitedir}/*.la \
+	%{?with_static_libs:$RPM_BUILD_ROOT%{py_sitedir}/*.a}
 %py_comp $RPM_BUILD_ROOT%{py_sitedir}
 %py_ocomp $RPM_BUILD_ROOT%{py_sitedir}
 %py_postclean
@@ -176,7 +191,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc docs/html/
 %attr(755,root,root) %{_libdir}/libimobiledevice.so
 %{_includedir}/libimobiledevice
 %{_pkgconfigdir}/libimobiledevice-1.0.pc
@@ -186,6 +200,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %{_libdir}/libimobiledevice.a
 %endif
+
+%files apidocs
+%defattr(644,root,root,755)
+%doc docs/html/*
 
 %if %{with cython}
 %files -n python-imobiledevice

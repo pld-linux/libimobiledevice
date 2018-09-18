@@ -14,13 +14,14 @@ Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
 # 1.2.x is stable
 Version:	1.2.0
-Release:	4
+Release:	5
 License:	LGPL v2+
 Group:		Libraries
 #Source0Download: http://www.libimobiledevice.org/
 Source0:	http://www.libimobiledevice.org/downloads/%{name}-%{version}.tar.bz2
 # Source0-md5:	8757900ba7bbe2ef5f54342415d0223e
 Patch0:		%{name}-cython.patch
+Patch1:		openssl.patch
 URL:		http://www.libimobiledevice.org/
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake
@@ -113,6 +114,7 @@ Wiązania libimobiledevice dla Pythona.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}

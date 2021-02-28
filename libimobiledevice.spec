@@ -94,9 +94,7 @@ Statyczna biblioteka libimobiledevice.
 Summary:	API documentation for libimobiledevice library
 Summary(pl.UTF-8):	Dokumentacja API biblioteki libimobiledevice
 Group:		Documentation
-%if "%{_rpmversion}" >= "4.6"
 BuildArch:	noarch
-%endif
 
 %description apidocs
 API documentation for libimobiledevice library.

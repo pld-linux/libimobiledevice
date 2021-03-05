@@ -1,11 +1,12 @@
---- libimobiledevice-1.1.5/cython/lockdown.pxi.orig	2013-03-07 23:05:33.000000000 +0100
-+++ libimobiledevice-1.1.5/cython/lockdown.pxi	2013-09-01 10:16:46.775583997 +0200
-@@ -219,7 +219,7 @@
+diff -urNp -x '*.orig' libimobiledevice-1.3.0.org/cython/lockdown.pxi libimobiledevice-1.3.0/cython/lockdown.pxi
+--- libimobiledevice-1.3.0.org/cython/lockdown.pxi	2017-07-18 21:03:02.000000000 +0200
++++ libimobiledevice-1.3.0/cython/lockdown.pxi	2021-03-05 22:34:55.596823231 +0100
+@@ -263,7 +263,7 @@ cdef class LockdownClient(PropertyListSe
          cdef:
              lockdownd_error_t err
              char* c_session_id = NULL
 -            bint ssl_enabled
 +            int ssl_enabled
              bytes session_id
-         err = lockdownd_start_session(self._c_client, host_id, &c_session_id, &ssl_enabled)
+         err = lockdownd_start_session(self._c_client, host_id, &c_session_id, <int *>&ssl_enabled)
          try:

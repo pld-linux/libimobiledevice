@@ -16,7 +16,7 @@ Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
 Version:	1.3.0
-Release:	4
+Release:	5
 License:	LGPL v2+
 Group:		Libraries
 #Source0Download: https://www.libimobiledevice.org/

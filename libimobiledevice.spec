@@ -23,13 +23,14 @@ Group:		Libraries
 Source0:	https://github.com/libimobiledevice/libimobiledevice/releases/download/%{version}/%{name}-%{version}.tar.bz2
 # Source0-md5:	c50a3a32acf33dc8c9ec88137ad12ec4
 Patch0:		%{name}-cython.patch
+Patch1:		%{name}-libplist.patch
 URL:		https://libimobiledevice.org/
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake
 %{?with_gnutls:BuildRequires:	gnutls-devel >= 2.2.0}
 BuildRequires:	libgcrypt-devel
-BuildRequires:	libplist-devel >= 2.2.0
-BuildRequires:	libplist-c++-devel >= 2.2.0
+BuildRequires:	libplist-devel >= 2.3.0
+BuildRequires:	libplist-c++-devel >= 2.3.0
 BuildRequires:	libstdc++-devel
 %{?with_gnutls:BuildRequires:	libtasn1-devel >= 1.1}
 BuildRequires:	libtool
@@ -48,8 +49,8 @@ BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 %endif
 BuildRequires:	rpm-pythonprov
-Requires:	libplist >= 2.2.0
-Requires:	libplist-c++ >= 2.2.0
+Requires:	libplist >= 2.3.0
+Requires:	libplist-c++ >= 2.3.0
 Requires:	libusbmuxd >= 2.0.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -66,8 +67,8 @@ Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki libimobiledevice
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 %{?with_gnutls:Requires:	gnutls-devel >= 2.2.0}
-Requires:	libplist-devel >= 2.2.0
-Requires:	libplist-c++-devel >= 2.2.0
+Requires:	libplist-devel >= 2.3.0
+Requires:	libplist-c++-devel >= 2.3.0
 %{?with_gnutls:Requires:	libtasn1-devel >= 1.1}
 Requires:	libusbmuxd-devel >= 2.0.2
 %{?with_openssl:Requires:	openssl-devel >= 0.9.8}
@@ -131,6 +132,7 @@ Wiązania libimobiledevice dla Pythona 3.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}

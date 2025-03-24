@@ -140,9 +140,11 @@ Wiązania libimobiledevice dla Pythona 3.
 %{__autoconf}
 %{__autoheader}
 %{__automake}
+
 install -d build
 cd build
-../%configure \
+%define configuredir ..
+%configure \
 	%{!?with_openssl:--disable-openssl} \
 	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static} \
@@ -155,7 +157,8 @@ cd ..
 topdir=$(pwd)
 install -d build-py3
 cd build-py3
-../%configure \
+%define configuredir ..
+%configure \
 	PYTHON=%{__python3} \
 	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static}

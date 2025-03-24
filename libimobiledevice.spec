@@ -48,6 +48,7 @@ BuildRequires:	python3-Cython >= 0.17.0
 BuildRequires:	python3-devel >= 1:3.2
 BuildRequires:	python3-modules >= 1:3.2
 %endif
+BuildRequires:	rpmbuild(macros) >= 2.043
 BuildRequires:	rpm-pythonprov
 Requires:	libplist >= 2.3.0
 Requires:	libplist-c++ >= 2.3.0

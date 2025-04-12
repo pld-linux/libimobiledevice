@@ -16,7 +16,7 @@ Summary:	Library for connecting to mobile devices
 Summary(pl.UTF-8):	Biblioteka do łączenia się z urządzeniami mobilnymi
 Name:		libimobiledevice
 Version:	1.3.0
-Release:	8
+Release:	9
 License:	LGPL v2+
 Group:		Libraries
 #Source0Download: https://www.libimobiledevice.org/
@@ -148,6 +148,8 @@ install -d build
 cd build
 %define configuredir ..
 %configure \
+	CYTHON=cython2 \
+	PYTHON=%{__python} \
 	%{!?with_openssl:--disable-openssl} \
 	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static} \
@@ -162,6 +164,7 @@ install -d build-py3
 cd build-py3
 %define configuredir ..
 %configure \
+	CYTHON=cython3 \
 	PYTHON=%{__python3} \
 	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static}

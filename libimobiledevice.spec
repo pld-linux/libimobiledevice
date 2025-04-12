@@ -24,6 +24,7 @@ Source0:	https://github.com/libimobiledevice/libimobiledevice/releases/download/
 # Source0-md5:	c50a3a32acf33dc8c9ec88137ad12ec4
 Patch0:		%{name}-cython.patch
 Patch1:		%{name}-libplist.patch
+Patch2:		%{name}-python3.patch
 URL:		https://libimobiledevice.org/
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake
@@ -134,6 +135,7 @@ Wiązania libimobiledevice dla Pythona 3.
 %setup -q
 %patch -P 0 -p1
 %patch -P 1 -p1
+%patch -P 2 -p1
 
 %build
 %{__libtoolize}

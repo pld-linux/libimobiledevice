@@ -1,0 +1,45 @@
+--- libimobiledevice-1.4.0/configure.ac.orig	2025-10-05 23:29:21.000000000 +0200
++++ libimobiledevice-1.4.0/configure.ac	2026-03-29 07:48:52.428873035 +0200
+@@ -85,7 +85,7 @@ if test "x$ac_cv_have_endian_h" = "xno";
+ fi
+ 
+ CACHED_CFLAGS="$CFLAGS"
+-CFLAGS+=" $libplist_CFLAGS -Werror"
++CFLAGS="$CFLAGS $libplist_CFLAGS -Werror"
+ 
+ AC_CHECK_DECL([plist_from_json], [AC_DEFINE([HAVE_PLIST_JSON], [1], [Define if libplist has JSON support])], [], [[#include <plist/plist.h>]])
+ 
+@@ -138,7 +138,7 @@ if test "$build_cython" = "true"; then
+               AM_PATH_PYTHON([3.0], [
+                 CYTHON_PYTHON
+                 AS_COMPILER_FLAG([-Wno-cast-function-type -Werror], [
+-                  CYTHON_CFLAGS+=" -Wno-cast-function-type"
++                  CYTHON_CFLAGS="$CYTHON_CFLAGS -Wno-cast-function-type"
+                   AC_SUBST([CYTHON_CFLAGS])
+                 ], [])
+               ])
+@@ -204,12 +204,12 @@ if test "x$use_mbedtls" = "xyes"; then
+   fi
+   conf_mbedtls_LIBS=""
+   if test -n "$mbedtls_LIBDIR"; then
+-    conf_mbedtls_LIBS+=" -L$mbedtls_LIBDIR"
++    conf_mbedtls_LIBS="$conf_mbedtls_LIBS -L$mbedtls_LIBDIR"
+   fi
+   if test -n "$mbedtls_LIBS"; then
+-    conf_mbedtls_LIBS+=" $mbedtls_LIBS"
++    conf_mbedtls_LIBS="$conf_mbedtls_LIBS $mbedtls_LIBS"
+   else
+-    conf_mbedtls_LIBS+=" -lmbedtls -lmbedx509 -lmbedcrypto"
++    conf_mbedtls_LIBS="$conf_mbedtls_LIBS -lmbedtls -lmbedx509 -lmbedcrypto"
+   fi
+   AC_CHECK_HEADER(mbedtls/ssl.h, [break], [AC_MSG_ERROR([MbedTLS support explicitly requested, but includes could not be found. Try setting mbedtls_INCLUDES=/path/to/mbedtls/include])])
+   CFLAGS="$CACHED_CFLAGS"
+@@ -316,7 +316,7 @@ fi
+ AS_COMPILER_FLAGS(GLOBAL_CFLAGS, "-Wall -Wextra -Wmissing-declarations -Wredundant-decls -Wshadow -Wpointer-arith -Wwrite-strings -Wswitch-default -Wno-unused-parameter -fsigned-char -fvisibility=hidden")
+ 
+ if test "x$enable_static" = "xyes" -a "x$enable_shared" = "xno"; then
+-  GLOBAL_CFLAGS+=" -DLIBIMOBILEDEVICE_STATIC"
++  GLOBAL_CFLAGS="$GLOBAL_CFLAGS -DLIBIMOBILEDEVICE_STATIC"
+ fi
+ 
+ AC_SUBST(GLOBAL_CFLAGS)
